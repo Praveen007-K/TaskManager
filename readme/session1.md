@@ -114,20 +114,20 @@ File: `di/AppModule.kt`
 
 ## Completion Checklist
 
-- [ ] `libs.versions.toml` updated with all deps
-- [ ] Root `build.gradle.kts` updated with all plugins
-- [ ] `app/build.gradle.kts` updated with all deps + plugins
-- [ ] `google-services.json` placed in `app/`
-- [ ] `TaskManagerApplication.kt` created with `@HiltAndroidApp`
-- [ ] `AndroidManifest.xml` updated (application name + internet permission)
-- [ ] Base folder structure created
-- [ ] `Priority`, `Status` enums created
-- [ ] `Task` data class created
-- [ ] `User` data class created
-- [ ] `TaskEntity` Room entity created
-- [ ] `TaskDao` Room DAO created
-- [ ] `AppDatabase` Room database created
-- [ ] `AppModule` Hilt module created
+- [x] `libs.versions.toml` updated with all deps
+- [x] Root `build.gradle.kts` updated with all plugins
+- [x] `app/build.gradle.kts` updated with all deps + plugins
+- [x] `google-services.json` placed in `app/` ⚠️ Replace with real Firebase config
+- [x] `TaskManagerApplication.kt` created with `@HiltAndroidApp`
+- [x] `AndroidManifest.xml` updated (application name + internet permission)
+- [x] Base folder structure created
+- [x] `Priority`, `Status` enums created
+- [x] `Task` data class created
+- [x] `User` data class created
+- [x] `TaskEntity` Room entity created
+- [x] `TaskDao` Room DAO created
+- [x] `AppDatabase` Room database created
+- [x] `AppModule` Hilt module created
 
 ---
 

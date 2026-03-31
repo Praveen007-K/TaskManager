@@ -1,0 +1,10 @@
+{
+  "_IMPORTANT": "Replace this file with your actual google-services.json downloaded from the Firebase Console.",
+  "_STEPS": [
+    "1. Go to https://console.firebase.google.com/",
+    "2. Create or select your project",
+    "3. Add an Android app with package name: com.example.taskmanager",
+    "4. Download google-services.json and replace this file",
+    "5. Enable Firestore and Authentication (Google Sign-In) in Firebase Console"
+  ]
+}
