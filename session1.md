@@ -1,11 +1,11 @@
 ## Current Session
 
 Session Goal : Project setup — create an android project, configure build.gradle with all dependencies, set up Hilt, Room, Firebase Firestore, Firebase Auth, and create the base folder structure as defined in context.md.
-Current State : Project setup complete. All Gradle config, Hilt, Room, Firebase, base folder structure, models, repositories, and theme in place.
+Current State : Empty Android Project.
 
 Completed So Far:
 
-- [x] Project setup
+- [ ] Project setup
 - [ ] Auth
 - [ ] Add Task
 - [ ] Home screen
@@ -17,6 +17,3 @@ Completed So Far:
 - [ ] Calendar integration
 - [ ] Settings
 
-```
-
-```
