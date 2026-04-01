@@ -1,10 +1,39 @@
 {
-  "_IMPORTANT": "Replace this file with your actual google-services.json downloaded from the Firebase Console.",
-  "_STEPS": [
-    "1. Go to https://console.firebase.google.com/",
-    "2. Create or select your project",
-    "3. Add an Android app with package name: com.example.taskmanager",
-    "4. Download google-services.json and replace this file",
-    "5. Enable Firestore and Authentication (Google Sign-In) in Firebase Console"
-  ]
+  "project_info": {
+    "project_number": "453421790976",
+    "project_id": "taskmanager-56141",
+    "storage_bucket": "taskmanager-56141.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453421790976:android:866c6f1a57ff368a79e5e5",
+        "android_client_info": {
+          "package_name": "com.example.taskmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453421790976-p5gjjnvf2evdj0bh21ps50t6n0rq62ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH8t01zZSCpfnOiEen42jxf4scTdiwf-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453421790976-p5gjjnvf2evdj0bh21ps50t6n0rq62ul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }
