@@ -2,6 +2,7 @@ package com.example.taskmanager.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import android.util.Log
 import com.example.taskmanager.data.local.PreferencesDataStore
 import com.example.taskmanager.data.model.User
 import com.example.taskmanager.data.remote.AuthDataSource
@@ -35,8 +36,10 @@ class AuthViewModel @Inject constructor(
                     photoURL = firebaseUser.photoUrl?.toString() ?: ""
                 )
                 userRepository.saveUserToFirestore(user)
+                Log.d("AuthViewModel", "Sign in success: ${user.email}")
                 _uiState.value = AuthUiState.Success(user)
             } catch (e: Exception) {
+                Log.e("AuthViewModel", "Sign in failed: ${e::class.simpleName} — ${e.message}", e)
                 _uiState.value = AuthUiState.Error(e.message ?: "Sign in failed")
             }
         }
@@ -57,5 +60,10 @@ class AuthViewModel @Inject constructor(
 
     fun resetState() {
         _uiState.value = AuthUiState.Idle
+    }
+
+    fun setError(message: String) {
+        Log.e("AuthViewModel", "Credential error: $message")
+        _uiState.value = AuthUiState.Error(message)
     }
 }

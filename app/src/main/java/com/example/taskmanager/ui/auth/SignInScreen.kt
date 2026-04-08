@@ -15,8 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialException
+import androidx.credentials.exceptions.NoCredentialException
 import com.example.taskmanager.R
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import kotlinx.coroutines.launch
 
@@ -126,24 +128,42 @@ private suspend fun launchGoogleSignIn(
     onError: (String) -> Unit
 ) {
     val credentialManager = CredentialManager.create(activity)
+
+    // First try: show accounts already on device
     val googleIdOption = GetGoogleIdOption.Builder()
         .setFilterByAuthorizedAccounts(false)
         .setServerClientId(webClientId)
         .setAutoSelectEnabled(false)
         .build()
 
-    val request = GetCredentialRequest.Builder()
-        .addCredentialOption(googleIdOption)
-        .build()
+    // Fallback: full "Sign in with Google" bottom sheet (works even when no saved accounts)
+    val signInWithGoogleOption = GetSignInWithGoogleOption.Builder(webClientId).build()
 
-    try {
+    suspend fun attemptSignIn(useFallback: Boolean): String {
+        val request = GetCredentialRequest.Builder()
+            .apply {
+                if (useFallback) addCredentialOption(signInWithGoogleOption)
+                else addCredentialOption(googleIdOption)
+            }
+            .build()
         val result = credentialManager.getCredential(context = activity, request = request)
         val credential = result.credential
-        if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
-            val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
-            onSuccess(googleIdTokenCredential.idToken)
-        } else {
-            onError("Unexpected credential type")
+        check(credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+            "Unexpected credential type"
+        }
+        return GoogleIdTokenCredential.createFrom(credential.data).idToken
+    }
+
+    try {
+        onSuccess(attemptSignIn(useFallback = false))
+    } catch (e: NoCredentialException) {
+        // No saved credentials — fall back to full account picker
+        try {
+            onSuccess(attemptSignIn(useFallback = true))
+        } catch (e2: GetCredentialException) {
+            onError(e2.message ?: "Sign in cancelled")
+        } catch (e2: Exception) {
+            onError(e2.message ?: "Sign in failed")
         }
     } catch (e: GetCredentialException) {
         onError(e.message ?: "Sign in cancelled")

@@ -54,7 +54,8 @@ fun NavGraph(
                     authViewModel.signInWithGoogle(idToken)
                 },
                 onError = { message ->
-                    authViewModel.resetState()
+                    // Error from credential manager (before Firebase) — set error state so Snackbar shows
+                    authViewModel.setError(message)
                 }
             )
 
