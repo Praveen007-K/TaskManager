@@ -79,6 +79,17 @@ dependencies {
     // Google Sign-In
     implementation(libs.play.services.auth)
 
+    // Credential Manager
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
+    // DataStore
+    implementation(libs.androidx.datastore.preferences)
+
+    // Compose Foundation (Pager)
+    implementation(libs.androidx.compose.foundation)
+
     // WorkManager
     implementation(libs.androidx.work.runtime.ktx)
 
